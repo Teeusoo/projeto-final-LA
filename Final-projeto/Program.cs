@@ -8,6 +8,9 @@ namespace Final_projeto {
 
             Tabuleiro tab = new Tabuleiro(8, 8);
 
+            tela.imprimirTabuleiro(tab);
+
+
             Console.ReadLine();
             
         }
