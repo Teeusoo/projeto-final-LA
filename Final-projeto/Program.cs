@@ -15,10 +15,7 @@ namespace Final_projeto {
                     {
 
                         Console.Clear();
-                        tela.imprimirTabuleiro(partida.tab);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.turno);
-                        Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+                        tela.imprimirPartida(partida);
 
                         Console.WriteLine();
                         Console.Write("Origem: ");
