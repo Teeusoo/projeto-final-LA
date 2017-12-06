@@ -4,8 +4,8 @@ namespace Xadrez {
     class PartidaDeXadrez {
 
         public Tabuleiro tab { get; private set; }
-        private int turno;
-        private cor jogadorAtual;
+        public int turno { get; private set; }
+        public cor jogadorAtual { get; private set; }
         public bool terminada { get; private set; }
 
         public PartidaDeXadrez() {
@@ -22,6 +22,48 @@ namespace Xadrez {
             peca pecaCapturada = tab.retirarPeca(destino);
             tab.colocarPeca(p, destino);
         }
+        public void realizaJogada(Posicao origem,Posicao destino)
+        {
+            executaMovimento(origem, destino);
+            turno++;
+            mudaJogador();
+        }
+
+        public void validarPosicaoDeOrigem(Posicao pos)
+        {
+            if(tab.peca(pos) == null)
+            {
+                throw new tabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if(jogadorAtual != tab.peca(pos).cor)
+            {
+                throw new tabuleiroException("A peça de origem escolhida não é sua!");
+            }
+            if (!tab.peca(pos).existeMovimentosPossiveis())
+            {
+                throw new tabuleiroException("Não há movimentos possíveis para a peça de origem escolhida!");
+            }
+        }
+        public void validarPosicaoDeDestino(Posicao origem,Posicao destino)
+        {
+            if (!tab.peca(origem).podeMoverPara(destino))
+            {
+                throw new tabuleiroException("Posição de destino inválida!");
+            }
+        }
+        
+        private void mudaJogador()
+        {
+            if (jogadorAtual == cor.Branca)
+            {
+                jogadorAtual = cor.Preta;
+            }
+            else
+            {
+                jogadorAtual = cor.Branca;
+            }
+        }
+
         private void colocarPecas() {
             tab.colocarPeca(new torre(tab, cor.Branca), new PosicaoXadrez('c', 1).toPosicao());
             tab.colocarPeca(new torre(tab, cor.Branca), new PosicaoXadrez('c', 2).toPosicao());
