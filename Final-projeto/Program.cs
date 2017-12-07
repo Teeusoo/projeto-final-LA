@@ -40,6 +40,8 @@ namespace Final_projeto {
                         Console.ReadLine();
                     }
                     }
+                Console.Clear();
+                tela.imprimirPartida(partida);
 
             }
             catch (tabuleiroException e) {
